@@ -1,0 +1,666 @@
+﻿<%@ Master  Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage"  %>
+<%@ Register Assembly="msgBox" Namespace="BunnyBear" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+	<meta charset="utf-8" accesskey="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="description" content="At redONE, you will get the best deals - lowest monthly commitment, low mobile data charges, unlimited free calls among redONE Postpaid, 4G LTE Coverage, simple & flat call rates, competitve IDD rates and most importantly Blacklisted Users Accepted!">
+    <meta name="keywords" content="redONE mobile, redONE Promotion plans, Prepaid Plan, Postpaid Plans, Unlimited calls, Data Plans, High Speed, Video Streaming, Mobile Internet Plans, unlimited calls, 4G Data">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Ezyshare | Content Approval</title>
+	<meta name="description" content="Ezyshare Content Approval" />
+
+    <link href="assets/css/wickedpicker.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/multiple-select.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/formwizard.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/testBootstrapmin.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/testCustom.css" rel="stylesheet" type="text/css" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/bootstrapIndex.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css" />
+    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css" />
+    <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/footable.metro.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+
+    <style type="text/css">
+            html,body,form,.right-col,body.nav-md.container.body
+    {
+        
+        height:100% !important;
+        }
+    body,.left_col
+    {
+     background-color: #30b468;
+     
+    }
+    .nav-md
+    {
+        background-color: White;
+    }
+        .nav-sm
+    {
+        background-color: White;
+    }
+
+        body,html
+        {
+            overflow-x: hidden !important;
+           
+            }
+        #eventForm .form-control-feedback 
+        {
+            top: 0;
+            right: -15px;
+        }
+        .WordWrap
+        {
+            word-break: break-all;
+        }
+        
+ .icon-bar {
+    width: 40px;
+height:40px;
+    text-align: center;
+    background-color: #30b468;
+border-radius: 100%;
+}
+
+.icon-bar a {
+    padding: 7px;
+    display: block;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 24px;
+border-radius: 100%;
+}
+
+.icon-bar a:hover {
+    background-color: green;
+box-shadow: 3px 0px 3px #888888;
+}
+
+.fa-percent:before {
+      content: "\f295";
+    }
+        
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+
+
+
+.nav navbar-nav li:active
+{
+    background-color:#e7e7e7;
+}
+
+#masterheader .btn11 {
+    padding: 18px 16px 18px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #dfdfdf;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+    #masterheader .btn11:hover {
+        color: black;
+        text-decoration: none;
+        background-color: #dfdfdf;
+    }
+
+    .active {
+        color: black !important;
+        text-decoration: none;
+        background-color: #dfdfdf !important;
+    }
+
+#masterheader {
+    height: 50px;
+    width: 100%;
+    color: #dedede;
+    background-color: #4a4d5c;
+    padding: 15px;
+    transition: margin-left .5s;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+   </style>
+   
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load('visualization', '1', { packages: ['corechart'] });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: 'LandingPage.aspx/GetData',
+                data: '{}',
+                success:
+
+                    function (response) {
+                        drawVisualization(response.d);
+                    }
+            });
+        })
+
+        function drawVisualization(dataValues) {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Column Name');
+            data.addColumn('number', 'Column Value');
+
+            for (var i = 0; i < dataValues.length; i++) {
+                data.addRow([dataValues[i].ColumnName, dataValues[i].Value]);
+            }
+            new google.visualization.PieChart(document.getElementById('visualization')).
+                draw(data, { title: "Google Chart demo" });
+        }    
+
+
+});
+    </script>
+    <script type="text/javascript">
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("masterheader");
+        var btns = header.getElementsByClassName("btn11");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+</script>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body class="nav-md">
+    <form id="form1" runat="server">
+        <div class="container body" style="padding: 0;">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <asp:UpdatePanel ID="updatepanel1" runat="server" UpdateMode="Conditional"><ContentTemplate>
+
+                 <div id="masterheader">
+                    
+                    <a id="department" class="btn11" runat="server" onserverclick="btn_department_Click" href="">
+                        Department </a>
+                     <a id="category" class="btn11" runat="server"  onserverclick="btn_category_Click" href="">
+                        Category </a>
+                      <a id="Brand" class="btn11" runat="server"  onserverclick="Brand_ServerClick" href="">
+                        Brand </a>
+                        <a id="product" class="btn11" runat="server" href="" onserverclick="btn_item_Click">
+                        Products </a>
+                     <a id="grouping" class="btn11" runat="server" href="" onserverclick="grouping_ServerClick">
+                        Item Grouping </a>
+                     <a id="promotion" class="btn11" runat="server" href="" onserverclick="promotion_ServerClick">
+                        Promotion </a>
+                     <a id="modifier" class="btn11" runat="server" href="" onserverclick="modifier_ServerClick">
+                        Item Modifier </a>
+                     <a id="printer" class="btn11" runat="server" href="" onserverclick="printer_ServerClick">
+                        Printer </a>
+                     <a id="wizard" class="btn11" runat="server" href="" onserverclick="wizard_ServerClick">
+                        Wizard </a>
+            </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            <div class="main_container" style="margin-left: 10px; margin-right: 10px; margin-top: 10px;">
+                
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+<%--                    <iframe id="IframeId" runat="server" src="" style="margin: 0px; padding-left: 15px; background: white; width: 100% !important; height: -webkit-fill-available" frameborder="0" scrolling="yes"></iframe>--%>
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script src="assets/js/custom.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/multiple-select.js"></script>
+    <script src="assets/js/formwizard.js"></script>
+    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.sparkline.js"></script>
+    <script src="assets/js/common-scripts.js"></script>
+    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="js/moment.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="assets/js/sparkline-chart.js"></script>    
+    <script src="assets/js/zabuto_calendar.js"></script>	
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/js/footable.min.js"></script>
+    
+    <!-- editor -->
+    <script src="vendors/editor/editor.js"></script>
+    <script src="assets/js/chart-master/Chart.js" type="text/javascript"></script>
+    <script src="assets/js/wickedpicker.js" type="text/javascript"></script>
+    <script src="js/inputmask/jquery.inputmask.bundle.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[id*=txt_SalesTarget]').inputmask("numeric", {
+                radixPoint: ".",
+                groupSeparator: "",
+                digits: 2,
+                autoGroup: true,
+                rightAlign: false,
+                oncleared: function () { self.Value(''); }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function pageLoad() {
+            $('[id*=txt_FDate]').datepicker({ format: 'yyyy/mm/dd', widgetPositioning: {vertical: 'bottom'},autoclose: true });
+            $('[id*=txt_TDate]').datepicker({ format: 'yyyy/mm/dd', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+
+            $('[id*=txt_FTime]').datetimepicker({ format: 'HH:mm', widgetPositioning: {vertical: 'bottom'} });
+             $('[id*=txt_TTime]').datetimepicker({ format: 'HH:mm', widgetPositioning: {vertical: 'bottom'} });
+
+              $('[id*=txt_Test]').datetimepicker({ format: 'DD/MM/YYYY HH:mm', icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },widgetPositioning: {vertical: 'bottom'} });
+              $('[id*=txt_Test2]').datetimepicker({ format: 'DD/MM/YYYY', widgetPositioning: {vertical: 'bottom'} });
+
+              $('[id*=txt_DateOnly]').datetimepicker({ format: 'DD/MM/YYYY', widgetPositioning: {vertical: 'bottom'} });
+
+              $('[id*=txt_DateLimit]').datetimepicker({ format: 'DD/MM/YYYY', widgetPositioning: {vertical: 'bottom'}, showClear:true});
+            
+            var optionsStart = {
+             //  now: "00:00:00",
+                twentyFour: true,  //Display 24 hour format, defaults to false
+                upArrow: 'wickedpicker__controls__control-up',  //The up arrow class selector to use, for custom CSS
+                downArrow: 'wickedpicker__controls__control-down', //The down arrow class selector to use, for custom CSS
+                close: 'wickedpicker__close', //The close class selector to use, for custom CSS
+                //hoverState: 'hover-state', //The hover state class to use, for custom CSS
+                title: 'Pick the Start time', //The Wickedpicker's title,
+                showSeconds: true, //Whether or not to show seconds,
+               // secondsInterval: 1, //Change interval for seconds, defaults to 1,
+                //minutesInterval: 1, //Change interval for minutes, defaults to 1
+              //  beforeShow: null, //A function to be called before the Wickedpicker is shown
+               // show: null, //A function to be called when the Wickedpicker is shown
+                clearable: false, //Make the picker's input clearable (has clickable "x")
+            };
+
+            var optionsEnd = {
+              //now: "23:59:00",
+                twentyFour: true,  //Display 24 hour format, defaults to false
+                upArrow: 'wickedpicker__controls__control-up',  //The up arrow class selector to use, for custom CSS
+                downArrow: 'wickedpicker__controls__control-down', //The down arrow class selector to use, for custom CSS
+                close: 'wickedpicker__close', //The close class selector to use, for custom CSS
+                //hoverState: 'hover-state', //The hover state class to use, for custom CSS
+                title: 'Pick the End time', //The Wickedpicker's title,
+                showSeconds: true, //Whether or not to show seconds,
+                //secondsInterval: 1, //Change interval for seconds, defaults to 1,
+                //minutesInterval: 1, //Change interval for minutes, defaults to 1
+               // beforeShow: null, //A function to be called before the Wickedpicker is shown
+               // show: null, //A function to be called when the Wickedpicker is shown
+                clearable: false, //Make the picker's input clearable (has clickable "x")
+            };
+//            $('[id*=txt_FTime]').wickedpicker(optionsStart);
+//            $('[id*=txt_TTime]').wickedpicker(optionsEnd);
+        }
+</script>
+
+   
+    <script type="text/javascript">
+       $(function () {
+
+           $("input[id$=txt_FTime]").datetimepicker({
+               format: 'HH:mm',
+               icons: {
+                   time: "fa fa-clock-o",
+//                   date: "fa fa-calendar",
+//                   up: "fa fa-arrow-up",
+//                   down: "fa fa-arrow-down"
+               }
+               
+           });
+       });
+       $(function () {
+           $("input[id$=txt_TTime]").datetimepicker({
+              format: 'HH:mm',
+               widgetPositioning: {
+                   vertical: 'bottom'
+
+               }
+           });
+
+       });
+
+       $(function () {
+       $("input[id$=txt_Test]").datetimepicker({
+             // format: 'DD/MM/YYYY',
+               
+           });
+
+       });
+
+        $(function () {
+       $("input[id$=txt_Test2]").datetimepicker({
+              //format: 'DD/MM/YYYY',
+              icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                }
+           });
+
+       });
+       $(function () {
+       $("input[id$=txt_DateOnly]").datetimepicker({
+             // format: 'DD/MM/YYYY',
+               
+           });
+
+       });
+
+       $(function () {
+       $("input[id$=txt_DateLimit]").datetimepicker({
+             // format: 'DD/MM/YYYY',
+               
+           });
+
+       });
+
+
+   
+   </script>
+
+
+    <script type="text/javascript">
+                  $(function () {
+                      $('[id*=GridView4]').footable();
+                      $('[id*=GridView1]').footable();
+                      $('[id*=grd_View]').footable();
+                      $('[id*=GridView3]').footable();
+                      $('[id*=txtDate]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: {vertical: 'bottom'}, autoclose: true });
+                      $('[id*=txt_FDate1]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_FDate2]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_FDate3]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_FDate4]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_FDate5]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_TDate1]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_TDate2]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_TDate3]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_TDate4]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_TDate5]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+
+//                      $('[id*=txt_FTime]').wickedpicker({ format: 'HH:mm:ss', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+//                      $('[id*=txt_TTime]').wickedpicker({ format: 'HH:mm:ss', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+//                      $('[id*=txt_FTime2]').datetimepicker({ format: 'HH:mm:ss', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+//                      $('[id*=txt_TTime2]').datetimepicker({ format: 'HH:mm:ss', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+
+                      $('[id*=txt_FDate1PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_FDate2PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_FDate3PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_FDate4PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_FDate5PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_TDate1PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_TDate2PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_TDate3PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_TDate4PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+                      $('[id*=txt_TDate5PB]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom'} });
+
+                      $('[id*=txt_FDate]').datepicker({ format: 'yyyy/mm/dd', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_TDate]').datepicker({ format: 'yyyy/mm/dd', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+                      $('[id*=txt_EDate]').datepicker({ format: 'dd/mm/yyyy', widgetPositioning: { vertical: 'bottom' }, autoclose: true });
+
+                     // $('[id*=DatePrice]').datepicker({ format: 'dd/mm/yyyy'});
+                  });
+
+                  //////////////////////// remember which accordian state ///////////////////////////
+                  $(function () {
+                      var paneName = $("[id*=PaneName]").val() != "" ? $("[id*=PaneName]").val() : "collapse1";
+
+                      //Remove the previous selected Pane.
+                      $("#accordion .in").removeClass("in");
+
+                      //Set the selected Pane.
+                      $("#" + paneName).collapse("show");
+
+                      //When Pane is clicked, save the ID to the Hidden Field.
+                      $(".panel-heading a").click(function () {
+                          $("[id*=PaneName]").val($(this).attr("href").replace("#", ""));
+                      });
+                  });
+
+                  $(function () {
+                      var paneName = $("[id*=PaneName]").val() != "" ? $("[id*=PaneName]").val() : "collapse2";
+
+                      //Remove the previous selected Pane.
+                      $("#accordion .in").removeClass("in");
+
+                      //Set the selected Pane.
+                      $("#" + paneName).collapse("show");
+
+                      //When Pane is clicked, save the ID to the Hidden Field.
+                      $(".panel-heading a").click(function () {
+                          $("[id*=PaneName]").val($(this).attr("href").replace("#", ""));
+                      });
+                  });
+
+                  $(function () {
+                      var paneName = $("[id*=PaneName]").val() != "" ? $("[id*=PaneName]").val() : "collapse3";
+
+                      //Remove the previous selected Pane.
+                      $("#accordion .in").removeClass("in");
+
+                      //Set the selected Pane.
+                      $("#" + paneName).collapse("show");
+
+                      //When Pane is clicked, save the ID to the Hidden Field.
+                      $(".panel-heading a").click(function () {
+                          $("[id*=PaneName]").val($(this).attr("href").replace("#", ""));
+                      });
+                  });
+
+                 $(function () {
+                      var paneName = $("[id*=PaneName]").val() != "" ? $("[id*=PaneName]").val() : "collapse4";
+
+                      //Remove the previous selected Pane.
+                      $("#accordion .in").removeClass("in");
+
+                      //Set the selected Pane.
+                      $("#" + paneName).collapse("show");
+
+                      //When Pane is clicked, save the ID to the Hidden Field.
+                      $(".panel-heading a").click(function () {
+                          $("[id*=PaneName]").val($(this).attr("href").replace("#", ""));
+                      });
+                  });
+
+                  $(function () {
+                      var paneNameS = $("[id*=PaneNameS]").val() != "" ? $("[id*=PaneNameS]").val() : "";
+
+                      //Remove the previous selected Pane.
+                      $("#accordion1 .in").removeClass("in");
+
+                      //Set the selected Pane.
+                      $("#" + paneNameS).collapse("show");
+
+                      //When Pane is clicked, save the ID to the Hidden Field.
+                      $(".panel-heading i").click(function () {
+                          $("[id*=PaneNameS]").val($(this).attr("href").replace("#", ""));
+                      });
+                  });
+                  ////////////////////////////////////////////////////////////////////////////////
+                  function toggleFullScreen() {
+                      if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+   (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+                          if (document.documentElement.requestFullScreen) {
+                              document.documentElement.requestFullScreen();
+                          } else if (document.documentElement.mozRequestFullScreen) {
+                              document.documentElement.mozRequestFullScreen();
+                          } else if (document.documentElement.webkitRequestFullScreen) {
+                              document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+                          }
+                      } else {
+                          if (document.cancelFullScreen) {
+                              document.cancelFullScreen();
+                          } else if (document.mozCancelFullScreen) {
+                              document.mozCancelFullScreen();
+                          } else if (document.webkitCancelFullScreen) {
+                              document.webkitCancelFullScreen();
+                          }
+                      }
+                  }
+                  /////////////////////////////////////////////////////////////////////////////////////
+                  function readURL(input) {
+                      if (input.files && input.files[0]) {
+                          var reader = new FileReader();
+                          var reader2 = new FileReader();
+
+                          reader.onload = function (e) {
+                              $('#Img1')
+                        .attr('src', e.target.result)
+                        .width(150);
+                          };
+
+                          reader.readAsDataURL(input.files[0]);
+
+                          reader2.onload = function (e) {
+                              $('#Img2')
+                        .attr('src', e.target.result)
+                        .width(150);
+                          };
+
+                          reader2.readAsDataURL(input.files[0]);
+                      }
+                  }
+
+                  //////////////////////////////////////////////////////////////////////////////////////
+
+        function doClick(buttonName,e)
+        {
+            var key;
+
+            if(window.event)
+                key = window.event.keyCode;
+            else
+                key = e.which;
+    
+            if (key == 13)
+            {
+                var btn = document.getElementById(buttonName);
+                if (btn != null)
+                {
+                    btn.click();
+                }
+            }
+        }
+        function doNext(Nextn,e)
+        {
+            var key;
+
+            if(window.event)
+                key = window.event.keyCode;
+            else
+                key = e.which;
+    
+            if (key == 13)
+            {
+                var nxt = document.getElementById(Nextn);
+                if (nxt != null)
+                {
+                    nxt.focus();
+                }
+            }
+        }
+
+
+        //Stop Form Submission of Enter Key Press
+        function stopRKey(evt) {
+            var evt = (evt) ? evt : ((event) ? event : null);
+            var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+            if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
+        }
+        document.onkeypress = stopRKey;
+
+    </script>
+	
+	<script type="application/javascript">
+        $(document).ready(function () {
+
+        var width = $(window).width(), height = $(window).height();
+        if ((width >= 400)) 
+        {
+            $("#menu_toggle").click(function()
+            {
+                    $(".nav-md .container.body .right_col").css("margin-left", "70px");
+                    $(".nav-sm .container.body .right_col").css("margin-left","-190px");
+            });
+        } 
+        else
+        {
+            $("#menu_toggle").click(function()
+            {
+//                    $(".nav-md .container.body .right_col").css("opacity", "1");
+//                    $(".nav-sm .container.body .right_col").css({"opacity": "0.2", "z-index":"-1"});
+            });
+        }
+
+
+
+            $("#date-popover").popover({html: true, trigger: "manual"});
+            $("#date-popover").hide();
+            $("#date-popover").click(function (e) {
+                $(this).hide();
+            });
+        
+            $("#my-calendar").zabuto_calendar({
+                action: function () {
+                    return myDateFunction(this.id, false);
+                },
+                action_nav: function () {
+                    return myNavFunction(this.id);
+                },
+                ajax: {
+                    url: "show_data.php?action=1",
+                    modal: true
+                },
+                legend: [
+                    {type: "text", label: "Special event", badge: "00"},
+                    {type: "block", label: "Regular event", }
+                ]
+            });
+        });
+        
+        
+        function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+
+    </script>
+
+
+</body>
+</html>

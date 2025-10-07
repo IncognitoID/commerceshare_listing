@@ -1,0 +1,30 @@
+<asp:Repeater ID="rptTerms" runat="server" OnItemCommand="rptTerms_ItemCommand">
+    <ItemTemplate>
+        <p style="margin:1px 0; font-size:small; text-transform:none;">
+            <%# Container.ItemIndex + 1 %>. <%# Eval("TermText") %>
+
+            <!-- Hide these when printing -->
+            <asp:LinkButton ID="lnkEdit" runat="server" CssClass="no-print"
+                CommandName="Edit" CommandArgument='<%# Eval("TermNumber") %>' Text="[Edit]" />
+            <asp:LinkButton ID="lnkDelete" runat="server" CssClass="no-print"
+                CommandName="Delete" CommandArgument='<%# Eval("TermNumber") %>' Text="[Delete]" />
+        </p>
+    </ItemTemplate>
+</asp:Repeater>
+
+
+         <div class="maindiv" id="SalesOrdercontent_1" style="page-break-after: always">
+<div class="divheader" >
+<%--    <input id="Button1" onclick="//alert(collision($('#body'),$('#footer')));" type="button" value="button" />
+--%>
+ <div id='panelbtn' style="text-align:center;margin:10px">
+     <asp:Button ID="btnsave" runat="server" OnClientClick="printfunction();" style="margin-bottom: 10px" cssclass="btn btn-primary  btn-sm" Text="Print" />
+     <%--<button onclick="back();" style="display:none;" class="btn btn-danger">Back</button><button onclick="window.print();//alert(collision($('#body'),$('#footer')));" class="btn btn-primary">Print</button>--%>
+    <!-- ================= Terms & Conditions Section ================= -->
+<!--div style="margin-top:10px;">
+    <b>Terms &amp; Conditions</b> -->
+    <asp:Literal ID="litTerms" runat="server"></asp:Literal>
+    <br />
+    <asp:Button ID="btnEditTerms" runat="server" Text="Edit Terms & Conditions" />
+</!--div>
+<!-- =============================================================== -->
